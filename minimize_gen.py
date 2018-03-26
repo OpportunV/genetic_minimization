@@ -59,37 +59,6 @@ class Converger(MendelOrganism):
     def __repr__(self):
         return "Converger fitness=%f," % (
             self.fitness()) + ' '.join(['{: .12f}'.format(i) for i in [self['p{}'.format(i)] for i in range(N_PARS)]])
-
-
-def main():
-    global NUM_OF_GOOD_IN_ROW, FUNC
-    FUNC = func_temp
-    pop = Population(species=Converger, init=2, childCount=50, childCull=20)
-    
-    params_prev = None
-    current_iter = 0
-    while current_iter < MAX_N_ITER:
-        pop.gen()
-        best = pop.best()
-
-        params = np.array([float(i) for i in str(best).split(',')[1].split()])
-        
-        if current_iter > MIN_N_ITER:
-            delta_params = abs(params - params_prev)
-            if delta_params.max() < ATOL:
-                NUM_OF_GOOD_IN_ROW += 1
-            else:
-                NUM_OF_GOOD_IN_ROW = 0
-        
-        if NUM_OF_GOOD_IN_ROW > STOP_NUM_IN_ROW:
-            break
-        
-        print(current_iter, params)
-        
-        params_prev = params
-        current_iter += 1
-        
-    return params
         
 
 def gen_minimize(n_pars, func, bounds, stop_num=10, atol=1e-10, min_iters=100, max_iters=5000, args=None):
