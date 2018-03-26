@@ -4,7 +4,7 @@ from pygene3.population import Population
 import numpy as np
 
 
-def gen_minimize(n_pars, func, bounds, stop_num=10, atol=1e-10, min_iters=100, max_iters=5000, args=None):
+def gen_minimize(n_pars, func, bounds, stop_num=10, atol=1e-10, min_iters=100, max_iters=5000, args=None, print_each=False):
     N_PARS = n_pars
     FUNC = func
     BOUNDS = bounds
@@ -74,6 +74,9 @@ def gen_minimize(n_pars, func, bounds, stop_num=10, atol=1e-10, min_iters=100, m
     
         if NUM_OF_GOOD_IN_ROW > STOP_NUM_IN_ROW:
             break
+        
+        if print_each:
+            print('{0:4d}\t{1:s}'.format(current_iter, '  '.join('{: .6f}'.format(i) for i in params)))
     
         params_prev = params
         current_iter += 1
