@@ -14,16 +14,6 @@ NUM_OF_GOOD_IN_ROW = 0
 STOP_NUM_IN_ROW = 10
 
 
-def func_temp(params, x, y, z):
-    n = len(z)
-    ln_l = -0.5 * n * np.log(2 * np.pi) - n * np.log(params[0])
-    for i in range(n):
-        xi, yi, zi = x[i], y[i], z[i]
-        z_theo = params[1]
-        ln_l -= 0.5 * (zi - z_theo) ** 2 / params[0] ** 2
-    return -ln_l
-
-
 class CvGene(FloatGeneMax):
     """
     Gene which represents the numbers used in our organism
@@ -102,9 +92,3 @@ def gen_minimize(n_pars, func, bounds, stop_num=10, atol=1e-10, min_iters=100, m
         current_iter += 1
 
     return params
-
-
-if __name__ == '__main__':
-    x, y, z = np.loadtxt(r'D:\univ\Progin\python36\progs\diploma\catalogues3\Cepheids.txt', unpack=True)
-    pars = gen_minimize(2, func_temp, [-1, 1], args=(x, y, z), min_iters=1)
-    print(pars)
