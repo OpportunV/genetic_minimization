@@ -53,7 +53,7 @@ def gen_minimize(n_pars, fun, bounds=None, stop_num=10, atol=1e-10, min_iters=10
 
     params_prev = None
     current_iter = 0
-    NUM_OF_GOOD_IN_ROW = 0
+    good_in_row = 0
     while current_iter < max_iters:
         pop.gen()
         best = pop.best()
@@ -63,11 +63,11 @@ def gen_minimize(n_pars, fun, bounds=None, stop_num=10, atol=1e-10, min_iters=10
         if current_iter > min_iters:
             delta_params = abs(params - params_prev)
             if delta_params.max() < atol:
-                NUM_OF_GOOD_IN_ROW += 1
+                good_in_row += 1
             else:
-                NUM_OF_GOOD_IN_ROW = 0
+                good_in_row = 0
     
-        if NUM_OF_GOOD_IN_ROW > stop_num:
+        if good_in_row > stop_num:
             break
         
         if print_each:
