@@ -85,8 +85,6 @@ def gen_minimize(n_pars, func, bounds, stop_num=10, atol=1e-10, min_iters=100, m
     
         if NUM_OF_GOOD_IN_ROW > STOP_NUM_IN_ROW:
             break
-
-        print(current_iter, params)
     
         params_prev = params
         current_iter += 1
