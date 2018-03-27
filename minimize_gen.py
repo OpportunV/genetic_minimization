@@ -4,7 +4,8 @@ from pygene3.population import Population
 import numpy as np
 
 
-def gen_minimize(n_pars, fun, bounds=None, stop_num=10, atol=1e-10, min_iters=100, max_iters=5000, args=None, print_each=False):
+def gen_minimize(n_pars, fun, bounds=None, args=None,
+                 stop_num=10, atol=1e-10, min_iters=100, max_iters=5000, print_each=False):
     func = fun
     if args is not None:
         if not isinstance(args, tuple):
