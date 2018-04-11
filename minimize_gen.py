@@ -1,10 +1,11 @@
+from collections import Callable
 from pygene3.gene import FloatGeneMax
 from pygene3.organism import MendelOrganism
 from pygene3.population import Population
 import numpy as np
 
 
-def gen_minimize(n_pars, fun, bounds=None, args=None,
+def gen_minimize(n_pars, fun: Callable, bounds: list=None, args: tuple=None,
                  stop_num=10, atol=1e-10, min_iters=100, max_iters=5000, print_each=False):
     func = fun
     if args is not None:
@@ -55,6 +56,7 @@ def gen_minimize(n_pars, fun, bounds=None, args=None,
     params_prev = None
     current_iter = 0
     good_in_row = 0
+    params =[]
     while current_iter < max_iters:
         pop.gen()
         best = pop.best()
